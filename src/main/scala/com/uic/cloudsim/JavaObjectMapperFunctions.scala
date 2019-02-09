@@ -3,6 +3,7 @@ package com.uic.cloudsim
 
 import java.util
 
+import com.uic.cloudsim.ConfigReader.logger
 import org.cloudbus.cloudsim
 import org.cloudbus.cloudsim.{CloudletScheduler, Storage, UtilizationModel, UtilizationModelFull, UtilizationModelNull, UtilizationModelPlanetLabInMemory, UtilizationModelStochastic, provisioners}
 import org.cloudbus.cloudsim.provisioners.{BwProvisionerSimple, PeProvisionerSimple, RamProvisionerSimple}
@@ -123,6 +124,7 @@ object JavaObjectMapperFunctions {
         mapDatacenterCharacteristics(dc.datacenterCharacteristics),
         mapVmAllocationPolicy(VmAllocationPolicy(dc.vmAllocationPolicy,dc.datacenterCharacteristics.hostList)),
         new util.LinkedList[Storage](), dc.schedulingInterval)
+
     }
   }
 
@@ -144,7 +146,6 @@ object JavaObjectMapperFunctions {
       new cloudsim.Vm(vm.vmId, brokerId, vm.mips,
         vm.pesNumber, vm.ram, vm.bw, vm.size, vm.vmm,
         mapCloudletScheduler(vm.cloudletScheduler, vm.mips, vm.pesNumber))
-
 
     }
   }
@@ -171,7 +172,5 @@ object JavaObjectMapperFunctions {
           mapUtilizationModel(cloudlet.utilizationModelBw))
       }
     }
-
-
 
 }
