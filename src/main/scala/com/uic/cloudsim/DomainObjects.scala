@@ -14,11 +14,12 @@ case class Pe(peId: Int, peProvisioner: String, mips: Long)
 case class VmAllocationPolicy(vmAllocationPolicy: String, hostList : List[Host])
 
 case class Host(hostId : Int, ramProvisioner: String, ram: Int, bwProvisioner: String,
-                bw : Int, storage:Long, peList: List[Pe], vmScheduler : String)
+                bw : Long, storage:Long, peList: List[Pe], vmScheduler : String)
+
 
 case class RamProvisioner(ramProvisioner: String, ram: Int)
 
-case class BwProvisioner(bwProvisioner: String, bw : Int)
+case class BwProvisioner(bwProvisioner: String, bw : Long)
 
 case class VmScheduler(vmScheduler: String, peList : List[Pe])
 

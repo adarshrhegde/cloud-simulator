@@ -15,14 +15,14 @@ object SimUtils {
     val indent = "    "
     val dft: DecimalFormat = new DecimalFormat("###.##")
 
-    logger.info("Cloudlet ID" + indent + "STATUS" + indent
+    logger.debug("Cloudlet ID" + indent + "STATUS" + indent
       + "Data center ID" + indent + "VM ID" + indent + "Time" + indent
       + "Start Time" + indent + "Finish Time")
 
     for (i <- 0 to cloudletList.size() - 1) {
       val cloudlet: cloudsim.Cloudlet = cloudletList.get(i)
       if (cloudlet.getCloudletStatus == cloudsim.Cloudlet.SUCCESS) {
-        logger.info(indent + cloudlet.getCloudletId() + indent + indent +
+        logger.debug(indent + cloudlet.getCloudletId() + indent + indent +
           "SUCCESS" + indent + indent + cloudlet.getResourceId()
           + indent + indent + indent + cloudlet.getVmId()
           + indent + indent

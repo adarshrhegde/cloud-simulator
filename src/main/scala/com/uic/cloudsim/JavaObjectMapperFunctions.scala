@@ -108,6 +108,11 @@ object JavaObjectMapperFunctions {
               JavaConverters.seqAsJavaList[cloudsim.Host](vmAllocationPolicy.hostList.map(mapHost))
             )
 
+          /*case "VmAllocationPolicyBestFit" =>
+            new cloudsimextension.VmAllocationPolicyBestFit(
+              JavaConverters.seqAsJavaList[cloudsim.Host](vmAllocationPolicy.hostList.map(mapHost))
+            )*/
+
           case _ =>
             new cloudsim.VmAllocationPolicySimple(
               JavaConverters.seqAsJavaList[cloudsim.Host](vmAllocationPolicy.hostList.map(mapHost))

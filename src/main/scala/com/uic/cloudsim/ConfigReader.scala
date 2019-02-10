@@ -15,12 +15,19 @@ case class Config(simParameter: SimParameter, datacenterList : List[Datacenter],
 
 
 class ConfigReader(configuration : Option[Config]) {
+
   import ConfigReader.logger
 
   val config : Config = configuration.get
 
-  def getDatacenterList() : util.List[cloudsim.Datacenter] = {
+  def getDatacenterNamesList(): List[String] = {
+    config.datacenterList.map(dc => dc.name)
+
+  }
+
+  def getDatacenterList(dcName : String) : util.List[cloudsim.Datacenter] = {
     val dcList : util.List[cloudsim.Datacenter] = config.datacenterList
+        .filter(dc => dc.name.equals(dcName))
       .map(mapDatacenter).asJava
 
       dcList.forEach(dc => {

@@ -7,38 +7,66 @@ import com.uic.cloudsim.SimUtils.printCloudletList
 import org.cloudbus.cloudsim
 import org.slf4j.LoggerFactory
 
+import scala.collection.mutable
+import scala.collection.mutable.HashMap
 class Simulator {
 
   def simulate() = {
 
     val logger = LoggerFactory.getLogger(classOf[Simulator])
 
+    logger.info("Begin simulation!")
     val reader : ConfigReader = ConfigReader()
 
     val simParameter : SimParameter = reader.getSimParameter()
     val calendar:Calendar = Calendar.getInstance()
-    org.cloudbus.cloudsim.core.CloudSim.init(
-      simParameter.numUsers, calendar, simParameter.traceFlag)
 
-    val broker:cloudsim.DatacenterBroker = new cloudsim.DatacenterBroker(simParameter.brokerName)
+    val cloudletCostMap : HashMap[Int, Double] = new HashMap[Int, Double]()
+    val cloudletDcMap : HashMap[Int, String] = new mutable.HashMap[Int, String]()
+    val dcNamesList : List[String] = reader.getDatacenterNamesList()
 
-    val vmList : java.util.List[cloudsim.Vm] = reader.getVmList(broker.getId)
+    dcNamesList.foreach(dc => {
+
+      logger.info("Performing simulation for Datacenter {}", dc)
+      cloudsim.core.CloudSim.init(
+        simParameter.numUsers, calendar, simParameter.traceFlag)
+
+      val broker:cloudsim.DatacenterBroker = new cloudsim.DatacenterBroker(simParameter.brokerName)
+
+      val vmList : java.util.List[cloudsim.Vm] = reader.getVmList(broker.getId)
 
 
-    val cloudletList : java.util.List[cloudsim.Cloudlet] = reader.getCloudletList()
+      val cloudletList : java.util.List[cloudsim.Cloudlet] = reader.getCloudletList()
 
-    cloudletList.forEach(cl => cl.setUserId(broker.getId))
+      cloudletList.forEach(cl => cl.setUserId(broker.getId))
 
-    broker.submitVmList(vmList)
-    broker.submitCloudletList(cloudletList)
+      broker.submitVmList(vmList)
+      broker.submitCloudletList(cloudletList)
 
-    val dcList : util.List[cloudsim.Datacenter] = reader.getDatacenterList()
+      val dcList : util.List[cloudsim.Datacenter] = reader.getDatacenterList(dc)
 
-    cloudsim.core.CloudSim.startSimulation()
-    cloudsim.core.CloudSim.stopSimulation()
+      cloudsim.core.CloudSim.startSimulation()
+      cloudsim.core.CloudSim.stopSimulation()
 
-    val newList : util.List[cloudsim.Cloudlet] = broker.getCloudletReceivedList()
+      val newList : util.List[cloudsim.Cloudlet] = broker.getCloudletReceivedList()
 
-    printCloudletList(newList)
+      newList.forEach(cl => {
+        if(!cloudletCostMap.contains(cl.getCloudletId) || cl.getProcessingCost < cloudletCostMap.get(cl.getCloudletId).get)
+          {
+            cloudletCostMap += cl.getCloudletId -> cl.getProcessingCost
+            cloudletDcMap += cl.getCloudletId -> dc
+          }
+
+         })
+      printCloudletList(newList)
+
+    })
+
+    cloudletDcMap.foreach((item) => {
+      logger.info("Cloudlet {} can be run optimally in Datacenter {}", item._1.toString(), item._2.toString:Any)
+
+    })
+
+    logger.info("End simulation!")
   }
 }
