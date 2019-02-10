@@ -15,7 +15,6 @@ libraryDependencies ++= Seq(
   "org.slf4j" % "slf4j-api" % slf4jVersion,
   "ch.qos.logback" % "logback-core" % logbackVersion,
   "ch.qos.logback" % "logback-classic" % logbackVersion,
-  //"com.typesafe" % "config" % typeSafeConfigVersion,
   "com.github.pureconfig" %% "pureconfig" % pureConfigVersion,
   "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 
