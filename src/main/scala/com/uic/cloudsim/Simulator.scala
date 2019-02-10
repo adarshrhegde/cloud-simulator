@@ -32,14 +32,18 @@ class Simulator {
         simParameter.numUsers, calendar, simParameter.traceFlag)
 
       val broker:cloudsim.DatacenterBroker = new cloudsim.DatacenterBroker(simParameter.brokerName)
+      logger.debug("Created broker {}", simParameter.brokerName)
 
+      logger.debug("Creating VMs")
       val vmList : java.util.List[cloudsim.Vm] = reader.getVmList(broker.getId)
 
 
+      logger.debug("Creating Cloudlets")
       val cloudletList : java.util.List[cloudsim.Cloudlet] = reader.getCloudletList()
 
       cloudletList.forEach(cl => cl.setUserId(broker.getId))
 
+      logger.debug("Submitting VM list and cloudlet list to broker")
       broker.submitVmList(vmList)
       broker.submitCloudletList(cloudletList)
 
@@ -50,6 +54,7 @@ class Simulator {
 
       val newList : util.List[cloudsim.Cloudlet] = broker.getCloudletReceivedList()
 
+      logger.debug("Calculating costs")
       newList.forEach(cl => {
         if(!cloudletCostMap.contains(cl.getCloudletId) || cl.getProcessingCost < cloudletCostMap.get(cl.getCloudletId).get)
           {

@@ -17,5 +17,6 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % logbackVersion,
   //"com.typesafe" % "config" % typeSafeConfigVersion,
   "com.github.pureconfig" %% "pureconfig" % pureConfigVersion,
+  "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 
 )
