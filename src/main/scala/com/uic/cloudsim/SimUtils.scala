@@ -5,6 +5,9 @@ import java.text.DecimalFormat
 import org.cloudbus.cloudsim
 import org.slf4j.LoggerFactory
 
+/**
+  * Utility class
+  */
 class SimUtils {}
 
 object SimUtils {

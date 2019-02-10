@@ -10,6 +10,9 @@ import org.cloudbus.cloudsim.provisioners.{BwProvisionerSimple, PeProvisionerSim
 
 import scala.collection.JavaConverters
 
+/**
+  * A mapper utility to convert scala objects to java objects and create them in cloudsim
+  */
 object JavaObjectMapperFunctions {
 
   implicit var mapPe = new Function[Pe, org.cloudbus.cloudsim.Pe] {

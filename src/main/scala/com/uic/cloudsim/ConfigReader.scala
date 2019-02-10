@@ -13,7 +13,10 @@ import scala.collection.JavaConverters._
 case class Config(simParameter: SimParameter, datacenterList : List[Datacenter],
                   vmList : List[Vm], cloudletList : List[Cloudlet])
 
-
+/**
+  * This class reads the configuration
+  * @param configuration
+  */
 class ConfigReader(configuration : Option[Config]) {
 
   import ConfigReader.logger

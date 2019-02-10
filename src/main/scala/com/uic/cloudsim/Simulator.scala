@@ -9,6 +9,10 @@ import org.slf4j.LoggerFactory
 
 import scala.collection.mutable
 import scala.collection.mutable.HashMap
+
+/**
+  * Runs the simulation
+  */
 class Simulator {
 
   def simulate() = {

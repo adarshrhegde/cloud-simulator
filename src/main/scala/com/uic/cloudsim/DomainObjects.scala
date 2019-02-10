@@ -1,5 +1,8 @@
 package com.uic.cloudsim
 
+/**
+  * Scala Version of cloudSim elements
+  */
 class DomainObjects {}
 
 case class Datacenter(name :String, datacenterCharacteristics: DatacenterCharacteristics,
