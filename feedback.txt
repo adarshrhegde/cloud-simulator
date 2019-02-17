@@ -1,5 +1,7 @@
 Hi Adarsh!
+I cannot compile your homework, neither in Intellij nor from the sbt command line. I tried it on two different computers. See the error message below.
 
+Regarding the implementation, your documentation and comments are scanty. Your implementation is basically a modified java example. You have 1.5%.
 
 Error:scalac: Error: org.jetbrains.jps.incremental.scala.remote.ServerException
 java.lang.StackOverflowError
@@ -1026,6 +1028,7 @@ java.lang.StackOverflowError
 	at scala.tools.nsc.Global$$anon$1.pluginsMacroExpand(Global.scala:448)
 	at scala.tools.nsc.typechecker.Macros.macroExpand(Macros.scala:757)
 	at scala.tools.nsc.typechecker.Macros.macroExpand$(Macros.scala:757)
-	at scala.tools.nsc.Global$$anon$1.macroExpand(Global.scala:448)
+	at scala.tools.nsc.Global$$anon$1.macroExpand(Global.scala:448)
+
 
 
